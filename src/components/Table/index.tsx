@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { type Book } from "../../types";
 interface TableProps {
   category?:
     | "Animals, Bugs & Pets"
@@ -10,15 +11,6 @@ interface TableProps {
     | "Science & Technology"
     | "Mystery & Suspense"
     | "Reference";
-}
-
-interface Book {
-  work_id: string;
-  title: string;
-  canonical_isbn: string;
-  authors: string[];
-  page_count: number;
-  cover_art_url: string;
 }
 
 interface ApiResponse {
