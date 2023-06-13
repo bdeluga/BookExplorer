@@ -7,8 +7,10 @@ export default function App() {
     <div className="flex min-h-screen flex-col text-gray-100 font-['Inter'] bg-gray-900">
       <Header />
       <main className="flex-1 flex-col justify-center flex items-center p-20">
-        <BreadCrumbs path={["home", "category", "details"]} />
-        <Table category="Science Fiction & Fantasy" />
+        <div>
+          <BreadCrumbs path={["home", "category", "details"]} />
+          <Table category="Science Fiction & Fantasy" />
+        </div>
       </main>
     </div>
   );
