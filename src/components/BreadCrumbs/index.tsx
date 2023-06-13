@@ -7,7 +7,7 @@ interface Crumbs {
 
 const BreadCrumbs = ({ path }: Crumbs) => {
   return (
-    <ul className="flex-shrink-0 flex mb-3 text-gray-500">
+    <ul className="flex-shrink-0 flex mb-3 ml-4 text-gray-500">
       {path.map((crumb, idx) => (
         <li className="flex items-center">
           <button
