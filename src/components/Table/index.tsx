@@ -49,9 +49,9 @@ const Table = ({ category }: TableProps) => {
     },
     queryKey: ["books"],
   });
-  console.log(data);
+  console.log(data?.results[0]);
   return (
-    <div className="bg-red-500 border overflow-y-auto flex-grow ">
+    <div className="border overflow-y-auto flex-grow p-10 rounded-lg">
       {isLoading && "Loading"}
       {data?.results.map((book) => (
         <div>{book.title}</div>
