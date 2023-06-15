@@ -9,7 +9,7 @@ const BreadCrumbs = ({ path }: Crumbs) => {
   return (
     <ul className="flex-shrink-0 flex mb-3 ml-4 text-gray-500">
       {path.map((crumb, idx) => (
-        <li className="flex items-center">
+        <li className="flex items-center" key={crumb}>
           <button
             className="hover:text-gray-300 capitalize disabled:pointer-events-none flex items-center gap-1 font-bold"
             disabled={idx === path.length - 1}

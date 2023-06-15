@@ -2,3 +2,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components{
+    th{
+        @apply border-b border-gray-600 font-medium p-2 md:p-4  pointer-events-none text-gray-200 text-left;
+    }
+    td{
+        @apply border-b border-gray-700 p-2 pl-2  md:p-4 md:pl-4 text-gray-400;
+    }
+    tr{
+        @apply cursor-pointer hover:bg-gray-700 transform duration-200;
+    }
+}
