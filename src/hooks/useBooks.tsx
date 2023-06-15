@@ -31,5 +31,6 @@ export const useBooks = (
         },
       }).then((res) => res.json()) as Promise<ApiResponse>;
     },
+    refetchOnWindowFocus: false,
     queryKey: ["books"],
   });
