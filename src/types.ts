@@ -8,13 +8,10 @@ interface Published_work {
 
 export interface Book {
   work_id: string;
-  title: string;
   canonical_isbn: string;
+  title: string;
   authors: string[];
-  page_count: number;
   categories: string[];
-  cover_art_url: string;
-  published_works: Published_work[];
 }
 
 export interface ApiResponse {
@@ -23,15 +20,14 @@ export interface ApiResponse {
   results: Book[];
 }
 
-export interface Categories {
-  category:
-    | "Animals, Bugs & Pets"
-    | "Art, Creativity & Music"
-    | "General Literature"
-    | "Hobbies, Sports & Outdoors"
-    | "Science Fiction & Fantasy"
-    | "Real Life"
-    | "Science & Technology"
-    | "Mystery & Suspense"
-    | "Reference";
-}
+export type Category =
+  | "Animals, Bugs & Pets"
+  | "Art, Creativity & Music"
+  | "General Literature"
+  | "Hobbies, Sports & Outdoors"
+  | "Science Fiction & Fantasy"
+  | "Real Life"
+  | "Science & Technology"
+  | "Mystery & Suspense"
+  | "Reference"
+  | undefined;
