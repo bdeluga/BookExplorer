@@ -19,18 +19,18 @@ export const useBooks = (
   { category }: useBooksProps = { category: "General Literature" }
 ) =>
   useQuery({
-    queryFn: () => {
-      const url = new URL("https://book-finder1.p.rapidapi.com/api/search");
-      url.searchParams.append("categories", category);
+    queryFn: () =>
+      fetch(
+        `https://book-finder1.p.rapidapi.com/api/search?categories=${category}&page=2`,
+        {
+          headers: {
+            "X-RapidAPI-Key":
+              "61ee40840cmsh54db39e70473bdap19d489jsn16e9c42eae87",
+            "X-RapidAPI-Host": "book-finder1.p.rapidapi.com",
+          },
+        }
+      ).then((res) => res.json()) as Promise<ApiResponse>,
 
-      return fetch(url, {
-        headers: {
-          "X-RapidAPI-Key":
-            "61ee40840cmsh54db39e70473bdap19d489jsn16e9c42eae87",
-          "X-RapidAPI-Host": "book-finder1.p.rapidapi.com",
-        },
-      }).then((res) => res.json()) as Promise<ApiResponse>;
-    },
     refetchOnWindowFocus: false,
-    queryKey: ["books"],
+    queryKey: ["books", category, page],
   });

@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { Book } from "../../types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 interface TableProps {
   headers: string[];
   data: Book[];
-  itemsPerPage: number;
   totalPages: number;
 }
 
-const Table = ({ headers, data, itemsPerPage, totalPages }: TableProps) => {
+const Table = ({ headers, data, totalPages }: TableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * data.length;
+  const indexOfFirstItem = indexOfLastItem - data.length;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (page: number) => {
@@ -50,9 +47,9 @@ const Table = ({ headers, data, itemsPerPage, totalPages }: TableProps) => {
         >
           Previous
         </button>
-        <button className="pagination">
-          {currentPage - 1 > 1 ? currentPage - 1 : currentPage}
-        </button>
+        {currentPage - 1 > 1 && (
+          <button className="pagination">{currentPage - 1}</button>
+        )}
         <button className="pagination">{currentPage}</button>
         <button className="pagination">
           {currentPage + 1 < totalPages - 1 ? currentPage + 1 : currentPage - 1}

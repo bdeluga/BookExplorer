@@ -21,7 +21,6 @@ export default function App() {
         <div className="basis-3/4">
           <BreadCrumbs path={["home", "category", "details"]} />
           <Table
-            itemsPerPage={10}
             totalPages={books?.total_pages || 1}
             headers={["ID", "Title", "Authors", "Categories"]}
             data={books?.results || []}
