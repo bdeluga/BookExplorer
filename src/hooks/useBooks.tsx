@@ -1,27 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApiResponse } from "../types";
+import { ApiResponse, Categories } from "../types";
 
-interface useBooksProps {
-  category:
-    | "Animals, Bugs & Pets"
-    | "Art, Creativity & Music"
-    | "General Literature"
-    | "Hobbies, Sports & Outdoors"
-    | "Science Fiction & Fantasy"
-    | "Real Life"
-    | "Science & Technology"
-    | "Mystery & Suspense"
-    | "Reference";
-}
-
-export const useBooks = (
-  //General Literature is a default to fetch for books with categories
-  { category }: useBooksProps = { category: "General Literature" }
-) =>
+export const useBooks = (category: Categories | undefined, page: number) =>
   useQuery({
     queryFn: () =>
       fetch(
-        `https://book-finder1.p.rapidapi.com/api/search?categories=${category}&page=2`,
+        `https://book-finder1.p.rapidapi.com/api/search?categories=${
+          category?.category || "General Literature"
+        }&page=${page}`,
         {
           headers: {
             "X-RapidAPI-Key":
@@ -30,7 +16,7 @@ export const useBooks = (
           },
         }
       ).then((res) => res.json()) as Promise<ApiResponse>,
-
+    keepPreviousData: true,
     refetchOnWindowFocus: false,
     queryKey: ["books", category, page],
   });

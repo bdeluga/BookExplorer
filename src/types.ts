@@ -22,3 +22,16 @@ export interface ApiResponse {
   total_pages: number;
   results: Book[];
 }
+
+export interface Categories {
+  category:
+    | "Animals, Bugs & Pets"
+    | "Art, Creativity & Music"
+    | "General Literature"
+    | "Hobbies, Sports & Outdoors"
+    | "Science Fiction & Fantasy"
+    | "Real Life"
+    | "Science & Technology"
+    | "Mystery & Suspense"
+    | "Reference";
+}
