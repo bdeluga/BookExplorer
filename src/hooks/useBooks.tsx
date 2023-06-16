@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApiResponse, Categories } from "../types";
+import { ApiResponse, Category } from "../types";
 
-export const useBooks = (category: Categories | undefined, page: number) =>
+export const useBooks = (category: Category, page: number) =>
   useQuery({
-    queryFn: () =>
-      fetch(
-        `https://book-finder1.p.rapidapi.com/api/search?categories=${
-          category?.category || "General Literature"
-        }&page=${page}`,
+    queryFn: async () => {
+      const response = await fetch(
+        "https://book-finder1.p.rapidapi.com/api/search?" +
+          new URLSearchParams({
+            categories: category || "General Literature",
+            page: page.toString(),
+          }),
         {
           headers: {
             "X-RapidAPI-Key":
@@ -15,8 +17,15 @@ export const useBooks = (category: Categories | undefined, page: number) =>
             "X-RapidAPI-Host": "book-finder1.p.rapidapi.com",
           },
         }
-      ).then((res) => res.json()) as Promise<ApiResponse>,
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+      return response.json() as Promise<ApiResponse>;
+    },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
+    retry: false,
+
     queryKey: ["books", category, page],
   });
