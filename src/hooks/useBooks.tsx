@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApiResponse, Category } from "../types";
+import { ApiResponse, Kind } from "../types";
 
-export const useBooks = (category: Category, page: number) =>
+export const useBooks = (kind: Kind, page: number, author?: string) =>
   useQuery({
     queryFn: async () => {
       const response = await fetch(
         "https://book-finder1.p.rapidapi.com/api/search?" +
           new URLSearchParams({
-            categories: category || "General Literature",
+            categories: kind || "General Literature",
             page: page.toString(),
-          }),
+          }) +
+          `${author ? `&author=${author}` : ""}`,
         {
           headers: {
             "X-RapidAPI-Key":
@@ -25,7 +26,6 @@ export const useBooks = (category: Category, page: number) =>
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
-    retry: false,
 
-    queryKey: ["books", category, page],
+    queryKey: ["books", kind, page, author],
   });
