@@ -1,11 +1,3 @@
-interface Published_work {
-  binding: string;
-  copyright: string | null;
-  cover_art_url: string;
-  isbn: string;
-  page_count: number;
-}
-
 export interface Book {
   work_id: string;
   canonical_isbn: string;
@@ -20,7 +12,7 @@ export interface ApiResponse {
   results: Book[];
 }
 
-export type Category =
+export type Kind =
   | "Animals, Bugs & Pets"
   | "Art, Creativity & Music"
   | "General Literature"
@@ -30,4 +22,4 @@ export type Category =
   | "Science & Technology"
   | "Mystery & Suspense"
   | "Reference"
-  | undefined;
+  | null;
