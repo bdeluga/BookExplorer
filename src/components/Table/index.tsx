@@ -1,23 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Book } from "../../types";
-import { faBookOpen, faGrinWink } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 
 interface TableProps {
   headers: string[];
   data?: Book[];
-  totalPages: number;
   error: object;
   isLoading: boolean;
+  isWidescreen: boolean;
+  setAuthor: (author: string) => void;
 }
 
-const Table = ({ headers, data, error, isLoading }: TableProps) => {
+const Table = ({
+  headers,
+  data,
+  isLoading,
+  error,
+  isWidescreen,
+  setAuthor,
+}: TableProps) => {
   if (error)
     return (
-      <div className="shadow-2xl text-center rounded-3xl p-10">
-        <p className="">You broke it. Nice...</p>
-        <p className="text-sm text-gray-600">
-          (Probably too many requests) <FontAwesomeIcon icon={faGrinWink} />
-        </p>
+      <div className="shadow-2xl text-center flex-1 grid place-items-center md:block md:h-fit rounded-3xl p-10">
+        <div>
+          <p>You broke it. Nice...</p>
+          <p className="text-sm text-gray-600">Refresh and try again.</p>
+        </div>
       </div>
     );
 
@@ -33,7 +41,7 @@ const Table = ({ headers, data, error, isLoading }: TableProps) => {
     );
 
   return (
-    <div className="shadow-2xl  rounded-3xl p-10">
+    <div className="shadow-2xl rounded-3xl p-4 md:p-10">
       <table className="border-collapse table-auto w-full text-sm">
         <thead>
           <tr>
@@ -44,8 +52,8 @@ const Table = ({ headers, data, error, isLoading }: TableProps) => {
         </thead>
         <tbody>
           {data?.map((row) => (
-            <tr key={row.canonical_isbn}>
-              <td>{row.canonical_isbn}</td>
+            <tr key={row.work_id} onClick={() => setAuthor(row.authors[0])}>
+              {isWidescreen && <td>{row.work_id}</td>}
               <td>{row.title}</td>
               <td>{row.authors.join(", ") || "Not known"}</td>
               <td>{row.categories.join(", ") || "Not known"}</td>
