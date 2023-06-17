@@ -60,7 +60,7 @@ export default function App() {
         kind={kind}
       />
       <Header />
-      <div className="flex min-h-screen max-w-[100rem] mx-auto flex-col">
+      <div className="flex min-h-screen w-full max-w-[100rem] mx-auto flex-col">
         <main className="flex-1 md:p-10 flex w-full flex-col lg:flex-row items-center lg:items-start">
           <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full basis-full">
             <Nav kind={kind} setKind={changeKind} />
