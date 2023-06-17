@@ -1,40 +1,38 @@
-import { Category } from "../../types";
+import { Kind } from "../../types";
 
 interface NavProps {
-  category: Category | undefined;
-  setCategory: (category: Category) => void;
+  kind: Kind;
+  setKind: (kind: Kind) => void;
 }
 
-const Nav = ({ category, setCategory }: NavProps) => {
+const Nav = ({ kind, setKind }: NavProps) => {
   return (
-    <>
+    <div className="hidden lg:block">
       <h2 className="mb-4  font-semibold text-slate-900 dark:text-slate-200">
-        Category
+        Kind
       </h2>
       <ul className="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
         <li>
           <button
-            onClick={() => setCategory(undefined)}
-            className={`nav ${category === undefined && "selected"}`}
+            onClick={() => setKind(null)}
+            className={`nav ${!kind && "selected"}`}
           >
             Not specified
           </button>
         </li>
         <li>
           <button
-            onClick={() => setCategory("Animals, Bugs & Pets")}
-            className={`nav ${
-              category === "Animals, Bugs & Pets" && "selected"
-            }`}
+            onClick={() => setKind("Animals, Bugs & Pets")}
+            className={`nav ${kind === "Animals, Bugs & Pets" && "selected"}`}
           >
             Animals, Bugs & Pets
           </button>
         </li>
         <li>
           <button
-            onClick={() => setCategory("Art, Creativity & Music")}
+            onClick={() => setKind("Art, Creativity & Music")}
             className={`nav ${
-              category === "Art, Creativity & Music" && "selected"
+              kind === "Art, Creativity & Music" && "selected"
             }`}
           >
             Art, Creativity & Music
@@ -42,9 +40,9 @@ const Nav = ({ category, setCategory }: NavProps) => {
         </li>
         <li>
           <button
-            onClick={() => setCategory("Hobbies, Sports & Outdoors")}
+            onClick={() => setKind("Hobbies, Sports & Outdoors")}
             className={`nav ${
-              category === "Hobbies, Sports & Outdoors" && "selected"
+              kind === "Hobbies, Sports & Outdoors" && "selected"
             }`}
           >
             Hobbies, Sports & Outdoors
@@ -52,9 +50,9 @@ const Nav = ({ category, setCategory }: NavProps) => {
         </li>
         <li>
           <button
-            onClick={() => setCategory("Science Fiction & Fantasy")}
+            onClick={() => setKind("Science Fiction & Fantasy")}
             className={`nav ${
-              category === "Science Fiction & Fantasy" && "selected"
+              kind === "Science Fiction & Fantasy" && "selected"
             }`}
           >
             Science Fiction & Fantasy
@@ -62,40 +60,38 @@ const Nav = ({ category, setCategory }: NavProps) => {
         </li>
         <li>
           <button
-            onClick={() => setCategory("Real Life")}
-            className={`nav ${category === "Real Life" && "selected"}`}
+            onClick={() => setKind("Real Life")}
+            className={`nav ${kind === "Real Life" && "selected"}`}
           >
             Real Life
           </button>
         </li>
         <li>
           <button
-            onClick={() => setCategory("Science & Technology")}
-            className={`nav ${
-              category === "Science & Technology" && "selected"
-            }`}
+            onClick={() => setKind("Science & Technology")}
+            className={`nav ${kind === "Science & Technology" && "selected"}`}
           >
             Science & Technology
           </button>
         </li>
         <li>
           <button
-            onClick={() => setCategory("Mystery & Suspense")}
-            className={`nav ${category === "Mystery & Suspense" && "selected"}`}
+            onClick={() => setKind("Mystery & Suspense")}
+            className={`nav ${kind === "Mystery & Suspense" && "selected"}`}
           >
             Mystery & Suspense
           </button>
         </li>
         <li>
           <button
-            onClick={() => setCategory("Reference")}
-            className={`nav ${category === "Reference" && "selected"}`}
+            onClick={() => setKind("Reference")}
+            className={`nav ${kind === "Reference" && "selected"}`}
           >
             Reference
           </button>
         </li>
       </ul>
-    </>
+    </div>
   );
 };
 
