@@ -23,3 +23,9 @@ export type Kind =
   | "Mystery & Suspense"
   | "Reference"
   | null;
+
+export interface ColumnHeader {
+  label: string;
+  key: keyof Book;
+  minWidth?: number;
+}

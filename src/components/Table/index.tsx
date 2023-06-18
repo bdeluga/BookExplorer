@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Book } from "../../types";
+import { Book, ColumnHeader } from "../../types";
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import { useMemo } from "react";
+import { useViewport } from "../../hooks/useViewport";
 
 interface TableProps {
-  headers: string[];
+  headers: ColumnHeader[];
   data?: Book[];
-  error: object;
+  error: Error;
   isLoading: boolean;
-  isWidescreen: boolean;
   rowClick: (book: Book) => void;
   selectedRow?: Book;
 }
@@ -17,13 +18,20 @@ const Table = ({
   data,
   isLoading,
   error,
-  isWidescreen,
   rowClick,
   selectedRow,
 }: TableProps) => {
+  const width = useViewport();
+
+  const visibleHeaders = useMemo(() => {
+    return headers.filter(
+      (header) => !header.minWidth || width >= header.minWidth
+    );
+  }, [width, headers]);
+
   if (error)
     return (
-      <div className="shadow-2xl text-center flex-1 grid place-items-center md:block md:h-fit rounded-3xl p-10">
+      <div className="text-center flex-1 grid place-items-center md:block md:h-fit rounded-3xl p-10">
         <div>
           <p>You broke it. Nice...</p>
           <p className="text-sm text-gray-600">Refresh and try again.</p>
@@ -33,12 +41,14 @@ const Table = ({
 
   if (isLoading)
     return (
-      <div className="shadow-2xl  rounded-3xl p-10 grid place-items-center">
-        <FontAwesomeIcon
-          icon={faBookOpen}
-          className="animate-bounce text-2xl"
-        />
-        Fetching book data...
+      <div className=" rounded-3xl h-full p-10 grid place-items-center">
+        <div className="flex flex-col gap-2">
+          <FontAwesomeIcon
+            icon={faBookOpen}
+            className="animate-bounce text-2xl"
+          />
+          Fetching book data...
+        </div>
       </div>
     );
 
@@ -47,24 +57,21 @@ const Table = ({
       <table className="border-collapse table-auto w-full text-sm">
         <thead>
           <tr>
-            {headers.map((heading) => (
-              <th key={heading}>{heading}</th>
+            {visibleHeaders.map((header) => (
+              <th key={header.label}>{header.label}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {data?.map((row) => (
             <tr
-              key={row.work_id}
               onClick={() => rowClick(row)}
-              className={`${
-                selectedRow?.work_id === row.work_id && "bg-gray-600"
-              }`}
+              key={row.work_id}
+              className={`${selectedRow === row && "bg-gray-600"}`}
             >
-              {isWidescreen && <td>{row.work_id}</td>}
-              <td>{row.title}</td>
-              <td>{row.authors.join(", ") || "Not known"}</td>
-              <td>{row.categories.join(", ") || "Not known"}</td>
+              {visibleHeaders.map((header) => (
+                <td key={row[header.key] as string}>{row[header.key]}</td>
+              ))}
             </tr>
           ))}
         </tbody>

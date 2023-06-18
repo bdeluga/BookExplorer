@@ -26,6 +26,5 @@ export const useBooks = (kind: Kind, page: number, author?: string) =>
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
-
     queryKey: ["books", kind, page, author],
   });
