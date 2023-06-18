@@ -1,13 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Book, ColumnHeader } from "../../types";
-import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBookOpen,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import { useMemo } from "react";
 import { useViewport } from "../../hooks/useViewport";
 
 interface TableProps {
   headers: ColumnHeader[];
   data?: Book[];
-  error: Error;
+  isError: boolean;
   isLoading: boolean;
   rowClick: (book: Book) => void;
   selectedRow?: Book;
@@ -17,7 +20,7 @@ const Table = ({
   headers,
   data,
   isLoading,
-  error,
+  isError,
   rowClick,
   selectedRow,
 }: TableProps) => {
@@ -29,12 +32,13 @@ const Table = ({
     );
   }, [width, headers]);
 
-  if (error)
+  if (isError)
     return (
       <div className="h-full p-10 grid place-items-center">
-        <div>
-          <p>You broke it. Nice...</p>
-          <p className="text-sm text-gray-600">Refresh and try again.</p>
+        <div className="flex flex-col justify-center items-center">
+          <FontAwesomeIcon icon={faTriangleExclamation} className=" text-2xl" />
+          <p className="mt-1">Error fetching books...</p>
+          <p className="text-xs text-gray-600">Refresh and try again.</p>
         </div>
       </div>
     );
