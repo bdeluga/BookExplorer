@@ -5,7 +5,7 @@ import Pagination from "./components/Pagination";
 
 import Nav from "./components/Nav";
 import BreadCrumbs from "./components/BreadCrumbs";
-import { Kind } from "./types";
+import { Book, Kind } from "./types";
 import { useViewport } from "./hooks/useViewport";
 import Header from "./components/Header";
 import Hamburger from "./components/Hamburger";
@@ -23,6 +23,7 @@ export default function App() {
   const [crumbs, setCrumbs] = useState<string[]>([]);
   const width = useViewport();
   const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<Book>();
 
   // const updateCrumbs = (crumb: string) => {};
   const changeKind = (kind: Kind) => {
@@ -37,11 +38,12 @@ export default function App() {
     setCrumbs(!kind ? [] : [kind as string]);
   };
 
-  const handleRowClick = (author_: string) => {
+  const handleRowClick = (book: Book) => {
     //no more nesting
+    setSelectedRow(book);
     if (author) return;
-    setAuthor(author_);
-    setCrumbs([...crumbs, author_]);
+    setAuthor(book.authors[0]);
+    setCrumbs([...crumbs, book.authors[0]]);
     setPage(1);
   };
   const clearBreadCrumbs = () => {
@@ -60,7 +62,7 @@ export default function App() {
         kind={kind}
       />
       <Header />
-      <div className="flex min-h-screen w-full max-w-[100rem] mx-auto flex-col">
+      <div className="flex min-h-screen w-full h-full max-w-[100rem] mx-auto flex-col">
         <main className="flex-1 md:p-10 flex w-full flex-col lg:flex-row items-center lg:items-start">
           <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full basis-full">
             <Nav kind={kind} setKind={changeKind} />
@@ -77,7 +79,8 @@ export default function App() {
               error={error as object}
               isLoading={isLoading}
               isWidescreen={width >= 500}
-              setAuthor={handleRowClick}
+              rowClick={handleRowClick}
+              selectedRow={selectedRow}
             />
 
             <Pagination

@@ -8,7 +8,8 @@ interface TableProps {
   error: object;
   isLoading: boolean;
   isWidescreen: boolean;
-  setAuthor: (author: string) => void;
+  rowClick: (book: Book) => void;
+  selectedRow?: Book;
 }
 
 const Table = ({
@@ -17,7 +18,8 @@ const Table = ({
   isLoading,
   error,
   isWidescreen,
-  setAuthor,
+  rowClick,
+  selectedRow,
 }: TableProps) => {
   if (error)
     return (
@@ -52,7 +54,13 @@ const Table = ({
         </thead>
         <tbody>
           {data?.map((row) => (
-            <tr key={row.work_id} onClick={() => setAuthor(row.authors[0])}>
+            <tr
+              key={row.work_id}
+              onClick={() => rowClick(row)}
+              className={`${
+                selectedRow?.work_id === row.work_id && "bg-gray-600"
+              }`}
+            >
               {isWidescreen && <td>{row.work_id}</td>}
               <td>{row.title}</td>
               <td>{row.authors.join(", ") || "Not known"}</td>
