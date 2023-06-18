@@ -5,8 +5,8 @@ import Pagination from "./components/Pagination";
 
 import Nav from "./components/Nav";
 import BreadCrumbs from "./components/BreadCrumbs";
-import { Book, ColumnHeader, Kind } from "./types";
-import { useViewport } from "./hooks/useViewport";
+import type { Book, ColumnHeader, Kind } from "./types";
+
 import Header from "./components/Header";
 import Hamburger from "./components/Hamburger";
 
@@ -21,7 +21,6 @@ export default function App() {
     isLoading,
   } = useBooks(kind, page, author);
   const [crumbs, setCrumbs] = useState<string[]>([]);
-  const width = useViewport();
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Book>();
 
@@ -80,7 +79,7 @@ export default function App() {
   ];
 
   return (
-    <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative">
+    <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative ">
       <Hamburger
         open={open}
         setOpen={setOpen}
@@ -88,8 +87,8 @@ export default function App() {
         kind={kind}
       />
       <Header />
-      <div className="lg:flex flex-1 w-full h-full  max-w-[100rem] mx-auto md:p-10">
-        <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full  basis-full">
+      <div className="flex flex-1 w-full h-full  max-w-[100rem] mx-auto md:p-10">
+        <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full hidden lg:block">
           <Nav kind={kind} setKind={changeKind} />
         </div>
         <div className="basis-3/4 px-4 mx-auto md:px-10 flex flex-col">
