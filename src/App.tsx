@@ -96,7 +96,7 @@ export default function App() {
         <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full hidden lg:block">
           <Nav kind={kind} setKind={changeKind} />
         </div>
-        <div className="basis-3/4 px-4 mx-auto md:px-10 flex flex-col">
+        <div className="basis-full lg:basis-3/4 px-4 mx-auto md:px-10 flex flex-col">
           <BreadCrumbs crumbs={crumbs} />
           <Table
             headers={headers}
