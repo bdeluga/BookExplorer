@@ -31,7 +31,7 @@ const Table = ({
 
   if (error)
     return (
-      <div className="text-center flex-1 grid place-items-center md:block md:h-fit rounded-3xl p-10">
+      <div className="h-full p-10 grid place-items-center">
         <div>
           <p>You broke it. Nice...</p>
           <p className="text-sm text-gray-600">Refresh and try again.</p>
@@ -41,7 +41,7 @@ const Table = ({
 
   if (isLoading)
     return (
-      <div className=" rounded-3xl h-full p-10 grid place-items-center">
+      <div className="h-full p-10 grid place-items-center">
         <div className="flex flex-col gap-2">
           <FontAwesomeIcon
             icon={faBookOpen}
