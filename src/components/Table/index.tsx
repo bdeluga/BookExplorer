@@ -25,7 +25,6 @@ const Table = ({
   selectedRow,
 }: TableProps) => {
   const width = useViewport();
-
   const visibleHeaders = useMemo(() => {
     return headers.filter(
       (header) => !header.minWidth || width >= header.minWidth
@@ -71,7 +70,9 @@ const Table = ({
             <tr
               onClick={() => rowClick(row)}
               key={row.work_id}
-              className={`${selectedRow === row && "bg-gray-600"}`}
+              className={`${
+                row.work_id === selectedRow?.work_id && "bg-gray-600"
+              }`}
             >
               {visibleHeaders.map((header) => (
                 <td key={row[header.key] as string}>{row[header.key]}</td>
