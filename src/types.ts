@@ -21,11 +21,15 @@ export type Kind =
   | "Real Life"
   | "Science & Technology"
   | "Mystery & Suspense"
-  | "Reference"
-  | null;
+  | "Reference";
 
 export interface ColumnHeader {
   label: string;
   key: keyof Book;
   minWidth?: number;
+}
+
+export interface Crumbs {
+  label: string;
+  returnFn?: () => void;
 }
