@@ -17,7 +17,7 @@ const Pagination = ({
   if (!totalPages) return null;
 
   return (
-    <ul className="inline-flex -space-x-px md:mt-8 mt-4 mb-2 self-center lg:self-end md:mr-4">
+    <ul className="inline-flex -space-x-px my-6 self-center lg:self-end md:mr-4">
       <button
         disabled={isLoading || page === 1}
         onClick={() => setPage(page - 1)}
