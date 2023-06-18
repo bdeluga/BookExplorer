@@ -14,6 +14,9 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [kind, setKind] = useState<Kind>(null);
   const [author, setAuthor] = useState("");
+  const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<Book | null>(null);
+
   const {
     data: books,
     isPreviousData,
@@ -29,6 +32,7 @@ export default function App() {
         setAuthor("");
         setKind(null);
         setCrumbs([crumbs[0]]);
+        setSelectedRow(null);
       },
     },
   ]);
@@ -47,8 +51,6 @@ export default function App() {
       },
     ]);
   };
-  const [open, setOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState<Book>();
 
   const handleRowClick = (book: Book) => {
     setSelectedRow(book);

@@ -13,7 +13,7 @@ interface TableProps {
   isError: boolean;
   isLoading: boolean;
   rowClick: (book: Book) => void;
-  selectedRow?: Book;
+  selectedRow: Book | null;
 }
 
 const Table = ({
