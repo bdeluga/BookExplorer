@@ -5,7 +5,7 @@ import Pagination from "./components/Pagination";
 
 import Nav from "./components/Nav";
 import BreadCrumbs from "./components/BreadCrumbs";
-import { Book, Kind } from "./types";
+import { Book, ColumnHeader, Kind } from "./types";
 import { useViewport } from "./hooks/useViewport";
 import Header from "./components/Header";
 import Hamburger from "./components/Hamburger";
@@ -53,8 +53,34 @@ export default function App() {
     setKinds(null);
   };
 
+  const headers: ColumnHeader[] = [
+    {
+      label: "Id",
+      key: "work_id",
+      minWidth: 500,
+    },
+    {
+      label: "Title",
+      key: "title",
+      minWidth: 0,
+    },
+    {
+      label: "Author(s)",
+      key: "authors",
+    },
+    {
+      label: "Kind(s)",
+      key: "categories",
+    },
+    {
+      label: "ISBN",
+      key: "canonical_isbn",
+      minWidth: 800,
+    },
+  ];
+
   return (
-    <div className="flex flex-col text-gray-100 font-['Inter'] relative">
+    <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative">
       <Hamburger
         open={open}
         setOpen={setOpen}
@@ -62,35 +88,28 @@ export default function App() {
         kind={kind}
       />
       <Header />
-      <div className="flex min-h-screen w-full h-full max-w-[100rem] mx-auto flex-col">
-        <main className="flex-1 md:p-10 flex w-full flex-col lg:flex-row items-center lg:items-start">
-          <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full basis-full">
-            <Nav kind={kind} setKind={changeKind} />
-          </div>
-          <div className="basis-3/4 px-4 md:px-10 flex flex-col">
-            <BreadCrumbs path={crumbs} homeFn={clearBreadCrumbs} />
-            <Table
-              headers={
-                width >= 500
-                  ? ["ID", "Title", "Author(s)", "Kind(s)"]
-                  : ["Title", "Author(s)", "Kind(s)"]
-              }
-              data={books?.results}
-              error={error as object}
-              isLoading={isLoading}
-              isWidescreen={width >= 500}
-              rowClick={handleRowClick}
-              selectedRow={selectedRow}
-            />
+      <div className="lg:flex flex-1 w-full h-full  max-w-[100rem] mx-auto md:p-10">
+        <div className="lg:basis-1/4 lg:sticky lg:top-10 h-full  basis-full">
+          <Nav kind={kind} setKind={changeKind} />
+        </div>
+        <div className="basis-3/4 px-4 mx-auto md:px-10 flex flex-col">
+          <BreadCrumbs path={crumbs} homeFn={clearBreadCrumbs} />
+          <Table
+            headers={headers}
+            data={books?.results}
+            error={error as Error}
+            isLoading={isLoading}
+            rowClick={handleRowClick}
+            selectedRow={selectedRow}
+          />
 
-            <Pagination
-              page={page}
-              setPage={setPage}
-              totalPages={books?.total_pages}
-              isLoading={isPreviousData}
-            />
-          </div>
-        </main>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            totalPages={books?.total_pages}
+            isLoading={isPreviousData}
+          />
+        </div>
       </div>
     </div>
   );
