@@ -7,10 +7,10 @@ export const useBooks = (kind: Kind, page: number, author?: string) =>
       const response = await fetch(
         "https://book-finder1.p.rapidapi.com/api/search?" +
           new URLSearchParams({
-            categories: kind || "General Literature",
+            categories: kind,
             page: page.toString(),
-          }) +
-          `${author ? `&author=${author}` : ""}`,
+            ...(author && { author }),
+          }),
         {
           headers: {
             "X-RapidAPI-Key":
@@ -20,6 +20,7 @@ export const useBooks = (kind: Kind, page: number, author?: string) =>
         }
       );
       if (!response.ok) {
+        //429 most of the times
         throw new Error("Something went wrong");
       }
       return response.json() as Promise<ApiResponse>;
