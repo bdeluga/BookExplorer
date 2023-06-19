@@ -12,7 +12,7 @@ import BreadCrumbs from "./components/BreadCrumbs";
 
 export default function App() {
   const [page, setPage] = useState(1);
-  const [kind, setKind] = useState<Kind>(null);
+  const [kind, setKind] = useState<Kind>("General Literature");
   const [author, setAuthor] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Book | null>(null);
@@ -30,7 +30,7 @@ export default function App() {
       returnFn: () => {
         setPage(1);
         setAuthor("");
-        setKind(null);
+        setKind("General Literature");
         setCrumbs([crumbs[0]]);
         setSelectedRow(null);
       },
@@ -40,6 +40,8 @@ export default function App() {
     setKind(kind);
     setAuthor("");
     setPage(1);
+    //don't set crumbs it's default
+    if (kind === "General Literature") return setCrumbs([crumbs[0]]);
     setCrumbs([
       crumbs[0],
       {

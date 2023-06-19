@@ -14,8 +14,8 @@ const Nav = ({ kind, setKind }: NavProps) => {
       <ul className="space-y-6 lg:space-y-2 border-l border-slate-100 dark:border-slate-800">
         <li>
           <button
-            onClick={() => setKind(null)}
-            className={`nav ${!kind && "selected"}`}
+            onClick={() => setKind("General Literature")}
+            className={`nav ${kind === "General Literature" && "selected"}`}
           >
             Not specified
           </button>
