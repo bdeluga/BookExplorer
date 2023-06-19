@@ -39,6 +39,7 @@ export default function App() {
   const changeKind = (kind: Kind) => {
     setKind(kind);
     setAuthor("");
+    setPage(1);
     setCrumbs([
       crumbs[0],
       {
@@ -46,6 +47,7 @@ export default function App() {
         returnFn: () => {
           //remove last element
           setAuthor("");
+          setPage(1);
           setCrumbs((prev) => prev.slice(0, prev.length - 1));
         },
       },
