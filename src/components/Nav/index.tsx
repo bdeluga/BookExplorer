@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Kind } from "../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useViewport } from "../../hooks/useViewport";
 
 interface NavProps {
   kind: Kind;
@@ -9,6 +10,7 @@ interface NavProps {
 }
 
 const Nav = ({ kind, setKind }: NavProps) => {
+  const width = useViewport();
   const [open, setOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -19,6 +21,11 @@ const Nav = ({ kind, setKind }: NavProps) => {
     setKind(kind);
     setOpen(false);
   };
+
+  //kinda dirty hack
+  useEffect(() => {
+    if (width >= 1024) setOpen(false);
+  }, [width]);
 
   return (
     <div className={`bg-gray-900 ${open && "fixed top-0 h-full"}`}>
