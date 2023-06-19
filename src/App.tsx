@@ -106,6 +106,7 @@ export default function App() {
             isLoading={isLoading}
             rowClick={handleRowClick}
             selectedRow={selectedRow}
+            isFetching={isPreviousData}
           />
 
           <Pagination

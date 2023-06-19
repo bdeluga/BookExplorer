@@ -14,6 +14,7 @@ interface TableProps {
   isLoading: boolean;
   rowClick: (book: Book) => void;
   selectedRow: Book | null;
+  isFetching: boolean;
 }
 
 const Table = ({
@@ -23,6 +24,7 @@ const Table = ({
   isError,
   rowClick,
   selectedRow,
+  isFetching,
 }: TableProps) => {
   const width = useViewport();
   const visibleHeaders = useMemo(() => {
@@ -56,7 +58,11 @@ const Table = ({
     );
 
   return (
-    <div className="shadow-2xl rounded-3xl p-4 md:p-10">
+    <div
+      className={`shadow-2xl rounded-3xl p-4 md:p-10 relative ${
+        isFetching && "blur-sm"
+      } `}
+    >
       <table className="border-collapse table-auto w-full text-sm">
         <thead>
           <tr>
