@@ -91,7 +91,7 @@ export default function App() {
   ];
 
   return (
-    <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative overflow-hidden">
+    <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative">
       <Header />
       <div className="flex flex-1 w-full h-full  max-w-[100rem] mx-auto md:p-10 ">
         <div className="lg:basis-1/4 lg:sticky lg:top-10 top-0 left-0 absolute lg:h-full">
