@@ -35,8 +35,10 @@ const Hamburger = ({ open, setOpen, setKind, kind }: Props) => {
           <ul className="mt-16 h-full space-y-6">
             <li>
               <button
-                onClick={() => handleClick(null)}
-                className={`nav w-full ${!kind && "selected"}`}
+                onClick={() => handleClick("General Literature")}
+                className={`nav w-full ${
+                  kind === "General Literature" && "selected"
+                }`}
               >
                 Not specified
               </button>
