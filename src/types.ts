@@ -6,6 +6,14 @@ export interface Book {
   categories: string[];
 }
 
+export interface TBook {
+  work_id: string;
+  canonical_isbn: string;
+  title: string;
+  authors: string;
+  categories: string;
+}
+
 export interface ApiResponse {
   total_results: number;
   total_pages: number;

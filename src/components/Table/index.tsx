@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Book, ColumnHeader } from "../../types";
+import { ColumnHeader, TBook } from "../../types";
 import {
   faBookOpen,
   faTriangleExclamation,
@@ -9,11 +9,11 @@ import { useViewport } from "../../hooks/useViewport";
 
 interface TableProps {
   headers: ColumnHeader[];
-  data?: Book[];
+  data?: TBook[];
   isError: boolean;
   isLoading: boolean;
-  rowClick: (book: Book) => void;
-  selectedRow: Book | null;
+  rowClick: (book: TBook) => void;
+  selectedRow: TBook | null;
   isFetching: boolean;
 }
 

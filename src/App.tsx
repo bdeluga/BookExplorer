@@ -5,13 +5,13 @@ import Pagination from "./components/Pagination";
 import Nav from "./components/Nav";
 import Header from "./components/Header";
 import BreadCrumbs from "./components/BreadCrumbs";
-import type { Book, Crumbs, ColumnHeader, Kind } from "./types";
+import type { Crumbs, ColumnHeader, Kind, TBook } from "./types";
 
 export default function App() {
   const [page, setPage] = useState(1);
   const [kind, setKind] = useState<Kind>("General Literature");
   const [author, setAuthor] = useState("");
-  const [selectedRow, setSelectedRow] = useState<Book | null>(null);
+  const [selectedRow, setSelectedRow] = useState<TBook | null>(null);
 
   const {
     data: books,
@@ -52,7 +52,7 @@ export default function App() {
     ]);
   };
 
-  const handleRowClick = (book: Book) => {
+  const handleRowClick = (book: TBook) => {
     setSelectedRow(book);
     if (author) return;
     setAuthor(book.authors[0]);
