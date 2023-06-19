@@ -55,11 +55,11 @@ export default function App() {
   const handleRowClick = (book: TBook) => {
     setSelectedRow(book);
     if (author) return;
-    setAuthor(book.authors[0]);
+    setAuthor(book.authors);
     setCrumbs([
       ...crumbs,
       {
-        label: book.authors[0],
+        label: book.authors,
       },
     ]);
     setPage(1);
@@ -94,7 +94,7 @@ export default function App() {
     <div className="flex flex-col text-gray-100 min-h-screen font-['Inter'] relative overflow-hidden">
       <Header />
       <div className="flex flex-1 w-full h-full  max-w-[100rem] mx-auto md:p-10 ">
-        <div className="lg:basis-1/4 lg:sticky lg:top-10 top-0 left-0 absolute lg:h-full z-10 lg:z-0">
+        <div className="lg:basis-1/4 lg:sticky lg:top-10 top-0 left-0 absolute lg:h-full">
           <Nav kind={kind} setKind={changeKind} />
         </div>
         <div className="basis-full lg:basis-3/4 px-4 mx-auto md:px-10 flex flex-col">

@@ -28,7 +28,7 @@ const Nav = ({ kind, setKind }: NavProps) => {
   }, [width]);
 
   return (
-    <div className={`bg-gray-900 ${open && "fixed top-0 h-full"}`}>
+    <div className={`bg-gray-900 z-10 ${open && "fixed top-0 h-full"}`}>
       <button
         className="lg:hidden text-slate-900 pl-4 pt-4 dark:text-slate-200"
         onClick={toggleMenu}
